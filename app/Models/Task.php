@@ -12,6 +12,8 @@ class Task extends Model
 {
     use HasFactory;
 
+    public const STATUSES = ['todo', 'in progress', 'done'];
+
     protected $guarded = [
         'id',
         'created_at',
