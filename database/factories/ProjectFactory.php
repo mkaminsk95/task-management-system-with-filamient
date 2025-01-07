@@ -9,7 +9,7 @@ class ProjectFactory extends Factory
     public function definition(): array
     {
         $startDate = $this->faker->date();
-        $endDate = $this->faker->dateTimeBetween($startDate, '+2 months');
+        $endDate = $this->faker->dateTimeBetween($startDate, '+1 year');
 
         return [
             'name' => $this->faker->sentence(),
