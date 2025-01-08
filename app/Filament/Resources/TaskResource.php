@@ -33,8 +33,10 @@ class TaskResource extends Resource
                     self::getFormSchema(),
                     [
                         Select::make('project_id')
+                            ->label('Project')
                             ->options(Project::all()->pluck('name', 'id'))
                             ->searchable()
+                            ->required()
                     ]
                 )
             );
@@ -108,6 +110,7 @@ class TaskResource extends Resource
                         ->options(Task::STATUSES)
                         ->default(Task::STATUSES[0]),
                     Select::make('user_id')
+                        ->label('User')
                         ->options(User::all()->pluck('name', 'id'))
                         ->searchable()
                         ->required(),
