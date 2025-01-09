@@ -38,7 +38,8 @@ class ProjectResource extends Resource
                 DatePicker::make('start_date')
                     ->label('Start Date')
                     ->required()
-                    ->placeholder('Enter the start date'),
+                    ->placeholder('Enter the start date')
+                    ->default(now()),
                 DatePicker::make('end_date')
                     ->label('End Date')
                     ->after('start_date')
