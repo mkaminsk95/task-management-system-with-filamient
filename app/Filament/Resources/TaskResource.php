@@ -35,7 +35,7 @@ class TaskResource extends Resource
                     [
                         Select::make('project_id')
                             ->label('Project')
-                            ->options(Project::all()->pluck('name', 'id'))
+                            ->options(Project::query()->pluck('name', 'id'))
                             ->searchable()
                             ->required()
                     ]
@@ -61,6 +61,7 @@ class TaskResource extends Resource
                         Task::STATUSES[0] => 'gray',
                         Task::STATUSES[1] => 'primary',
                         Task::STATUSES[2] => 'success',
+                        default => 'gray',
                     }),
                 TextColumn::make('description')
                     ->limit(50),
@@ -101,6 +102,9 @@ class TaskResource extends Resource
         ];
     }
 
+    /**
+     * @return array<int, mixed>
+     */
     public static function getFormSchema(): array
     {
         $options = Task::STATUSES;
@@ -139,7 +143,7 @@ class TaskResource extends Resource
                         ->required(),
                     Select::make('user_id')
                         ->label('User')
-                        ->options(User::all()->pluck('name', 'id'))
+                        ->options(User::query()->pluck('name', 'id'))
                         ->searchable()
                         ->required(),
                 ]

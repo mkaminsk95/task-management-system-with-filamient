@@ -18,6 +18,9 @@ class Project extends Model
         'updated_at',
     ];
 
+    /**
+     * @return HasMany<Task, $this>
+     */
     public function tasks(): HasMany
     {
         return $this->hasMany(Task::class);

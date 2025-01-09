@@ -1,8 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Filament\Resources\ProjectResource\RelationManagers;
 
 use App\Filament\Resources\TaskResource;
+use App\Models\Project;
 use App\Models\Task;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -10,6 +13,9 @@ use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
+/**
+ * @property Project $ownerRecord
+ */
 class TasksRelationManager extends RelationManager
 {
     protected static string $relationship = 'tasks';
@@ -43,6 +49,7 @@ class TasksRelationManager extends RelationManager
                         Task::STATUSES[0] => 'gray',
                         Task::STATUSES[1] => 'primary',
                         Task::STATUSES[2] => 'success',
+                        default => 'gray',
                     }),
                 TextColumn::make('description')
                     ->limit(50),
@@ -71,9 +78,14 @@ class TasksRelationManager extends RelationManager
             ]);
     }
 
+
+    /**
+     * @param array<string, mixed> $data
+     * @return array<string, mixed>
+     */
     protected function mutateFormDataBeforeCreate(array $data): array
     {
-        $data['project_id'] = $this->ownerRecord->id; // Automatically assign the project ID
+        $data['project_id'] = $this->ownerRecord->id;
         return $data;
     }
 }
