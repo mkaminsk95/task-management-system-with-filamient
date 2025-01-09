@@ -79,20 +79,23 @@ class TaskResource extends Resource
 
     public static function getFormSchema(): array
     {
+        $options = Task::STATUSES;
+        $keyValueOptions = array_combine($options, $options);
+
         return [
             Grid::make(1)->schema(
-                    [
-                        TextInput::make('name')
-                            ->label('Name')
-                            ->required()
-                            ->minLength(3)
-                            ->maxLength(255)
-                            ->placeholder('Enter the task name'),
-                        Textarea::make('description')
-                            ->label('Description')
-                            ->placeholder('Enter the task description'),
-                    ]
-                ),
+                [
+                    TextInput::make('name')
+                        ->label('Name')
+                        ->required()
+                        ->minLength(3)
+                        ->maxLength(255)
+                        ->placeholder('Enter the task name'),
+                    Textarea::make('description')
+                        ->label('Description')
+                        ->placeholder('Enter the task description'),
+                ]
+            ),
             Grid::make(2)->schema(
                 [
                     DatePicker::make('start_date')
@@ -107,8 +110,8 @@ class TaskResource extends Resource
                         ->reactive()
                         ->nullable(),
                     Select::make('status')
-                        ->options(Task::STATUSES)
-                        ->default(Task::STATUSES[0])
+                        ->options($keyValueOptions)
+                        ->default($keyValueOptions[$options[0]])
                         ->required(),
                     Select::make('user_id')
                         ->label('User')
