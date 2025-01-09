@@ -60,7 +60,7 @@ class TasksRelationManager extends RelationManager
                     ->searchable()
                     ->sortable()
                     ->placeholder('Not Set'),
-                ])
+            ])
             ->filters([
                 //
             ])
@@ -78,14 +78,14 @@ class TasksRelationManager extends RelationManager
             ]);
     }
 
-
     /**
-     * @param array<string, mixed> $data
+     * @param  array<string, mixed>  $data
      * @return array<string, mixed>
      */
     protected function mutateFormDataBeforeCreate(array $data): array
     {
         $data['project_id'] = $this->ownerRecord->id;
+
         return $data;
     }
 }

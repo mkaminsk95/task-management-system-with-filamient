@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\TaskResource\Pages;
-use App\Filament\Resources\TaskResource\RelationManagers;
 use App\Models\Project;
 use App\Models\Task;
 use App\Models\User;
@@ -37,7 +36,7 @@ class TaskResource extends Resource
                             ->label('Project')
                             ->options(Project::query()->pluck('name', 'id'))
                             ->searchable()
-                            ->required()
+                            ->required(),
                     ]
                 )
             );
@@ -147,7 +146,7 @@ class TaskResource extends Resource
                         ->searchable()
                         ->required(),
                 ]
-            )
+            ),
         ];
     }
 }
