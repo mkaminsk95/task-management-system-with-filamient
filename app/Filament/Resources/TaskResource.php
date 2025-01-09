@@ -108,7 +108,8 @@ class TaskResource extends Resource
                         ->nullable(),
                     Select::make('status')
                         ->options(Task::STATUSES)
-                        ->default(Task::STATUSES[0]),
+                        ->default(Task::STATUSES[0])
+                        ->required(),
                     Select::make('user_id')
                         ->label('User')
                         ->options(User::all()->pluck('name', 'id'))
