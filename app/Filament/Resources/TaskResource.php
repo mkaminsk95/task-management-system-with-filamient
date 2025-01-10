@@ -135,7 +135,7 @@ class TaskResource extends Resource
                         ->rules('required|date'),
                     DatePicker::make('end_date')
                         ->label('End Date')
-                        ->after('start_date')
+                        ->afterOrEqual('start_date')
                         ->placeholder('Enter the end date')
                         ->reactive()
                         ->nullable()
