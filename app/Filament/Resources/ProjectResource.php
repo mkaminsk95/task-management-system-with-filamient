@@ -31,21 +31,22 @@ class ProjectResource extends Resource
                     ->required()
                     ->minLength(3)
                     ->maxLength(255)
-                    ->placeholder('Enter the project name'),
+                    ->placeholder('Enter the project name')
+                    ->rules('required|string|min:3'),
                 Textarea::make('description')
                     ->label('Description')
                     ->placeholder('Enter the project description'),
                 DatePicker::make('start_date')
                     ->label('Start Date')
                     ->required()
-                    ->placeholder('Enter the start date')
-                    ->default(now()),
+                    ->placeholder('Enter the start date'),
                 DatePicker::make('end_date')
                     ->label('End Date')
-                    ->after('start_date')
+                    ->afterOrEqual('start_date')
                     ->placeholder('Enter the end date')
                     ->reactive()
-                    ->nullable(),
+                    ->nullable()
+                    ->rules('sometimes|date|after:start_date'),
             ]);
     }
 

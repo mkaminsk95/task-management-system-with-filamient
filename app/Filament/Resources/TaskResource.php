@@ -36,7 +36,8 @@ class TaskResource extends Resource
                             ->label('Project')
                             ->options(Project::query()->pluck('name', 'id'))
                             ->searchable()
-                            ->required(),
+                            ->required()
+                            ->rules('required|exists:users,id'),
                     ]
                 )
             );
@@ -117,7 +118,8 @@ class TaskResource extends Resource
                         ->required()
                         ->minLength(3)
                         ->maxLength(255)
-                        ->placeholder('Enter the task name'),
+                        ->placeholder('Enter the task name')
+                        ->rules('required|string|min:3|max:255'),
                     Textarea::make('description')
                         ->label('Description')
                         ->placeholder('Enter the task description'),
@@ -129,22 +131,26 @@ class TaskResource extends Resource
                         ->label('Start Date')
                         ->required()
                         ->placeholder('Enter the start date')
-                        ->default(now()),
+                        ->default(now())
+                        ->rules('required|date'),
                     DatePicker::make('end_date')
                         ->label('End Date')
-                        ->after('start_date')
+                        ->afterOrEqual('start_date')
                         ->placeholder('Enter the end date')
                         ->reactive()
-                        ->nullable(),
+                        ->nullable()
+                        ->rules('required|date|after:start_date'),
                     Select::make('status')
                         ->options($keyValueOptions)
                         ->default($keyValueOptions[$options[0]])
-                        ->required(),
+                        ->required()
+                        ->rules('required|in:' . implode(',', array_keys(Task::STATUSES))),
                     Select::make('user_id')
                         ->label('User')
                         ->options(User::query()->pluck('name', 'id'))
                         ->searchable()
-                        ->required(),
+                        ->required()
+                        ->rules('required|exists:users,id'),
                 ]
             ),
         ];
