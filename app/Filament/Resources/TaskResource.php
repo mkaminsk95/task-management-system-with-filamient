@@ -144,7 +144,7 @@ class TaskResource extends Resource
                         ->options($keyValueOptions)
                         ->default($keyValueOptions[$options[0]])
                         ->required()
-                        ->rules('required|in:' . implode(',', array_keys(Task::STATUSES))),
+                        ->rules('required|in:'.implode(',', Task::STATUSES)),
                     Select::make('user_id')
                         ->label('User')
                         ->options(User::query()->pluck('name', 'id'))
