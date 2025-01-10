@@ -64,7 +64,8 @@ class ProjectResource extends Resource
                     ->sortable(),
                 TextColumn::make('end_date')
                     ->searchable()
-                    ->sortable(),
+                    ->sortable()
+                    ->placeholder('Not Set'),
             ])
             ->filters([
             ])
